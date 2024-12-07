@@ -52,7 +52,7 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
          $token = $user->createToken('auth_token')->plainTextToken;
-         
+
         return response()->json([
             'message' => 'User logged in.',
             'user' => $user,
@@ -65,6 +65,25 @@ class AuthController extends Controller
     {
         $request->user()->tokens()->delete();
         return response()->json(['message' => 'Logged out successfully']);
+    }
+
+    public function resetPassword(Request $request)
+    {   
+        $request->validate([
+            'email' => 'required',
+            'new_password' => 'required|string|min:8'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if ($user) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            return response()->json(['message' => 'Successfuly reseted your password.']);
+        }
+
+        return response()->json(['message' => 'The user with that email doesent exist.'], 404);
     }
 }
 
