@@ -14,6 +14,26 @@ class OfferResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'status' => $this->status,
+            'price' => $this->price,
+            'payment_type' => $this->payment_type,
+            'date' => $this->date ? $this->date->format('Y-m-d') : null,
+            'notes' => $this->notes,
+            'service' => [
+                'id' => $this->service->id,
+                'name' => $this->service->name,
+                'category' => $this->service->serviceCategory->name ?? 'No Category',
+            ],
+            'buyer' => [
+                'id' => $this->buyer->id,
+                'email' => $this->buyer->email,
+            ],
+            'seller' => [
+                'id' => $this->seller->id,
+                'email' => $this->seller->email,
+            ],
+        ];
     }
 }

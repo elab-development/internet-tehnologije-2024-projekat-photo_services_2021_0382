@@ -36,4 +36,8 @@ class Offer extends Model
     {
         return $this->belongsTo(User::class, 'seller_id');
     }
+
+    protected $casts = [
+        'date' => 'datetime',
+    ];
 }
