@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Navigation container */
+.nav-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFD300; /* Yellow from the logo */
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+/* Left side - Logo */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  height: 50px;
+  width: auto;
+  padding: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-logo:hover {
+  transform: scale(1.1); /* Slight enlargement on hover */
+}
+
+/* Right side - Navigation Links */
+.nav-right {
+  margin-left: auto; /* Pushes links to the right */
+}
+
+.nav-right ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-right ul li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+/* Unique Hover Effect */
+.nav-right ul li a::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: black;
+  bottom: -5px;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease-in-out;
+}
+
+.nav-right ul li a:hover {
+  color: #333;
+}
+
+.nav-right ul li a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Arrow Circle Positioned at Bottom Edge */
+.nav-center {
+  position: absolute;
+  bottom: -20px; /* Moves the circle below the navbar */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.arrow-circle {
+  width: 40px;
+  height: 40px;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.arrow-icon {
+  color: #FFD300; /* Yellow arrow inside black circle */
+  font-size: 1.5rem;
+}
+
+.arrow-circle:hover {
+  transform: scale(1.1);
+}
+
+/* Breadcrumbs Section */
+.breadcrumbs {
+  background-color: #f9f9f9;
+  padding: 0.5rem 2rem;
+  font-size: 0.9rem;
+  color: #333;
+  border-top: 1px solid #eee;
+  text-align: center;
 }
