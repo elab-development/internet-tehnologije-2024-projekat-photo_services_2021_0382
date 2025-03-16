@@ -113,3 +113,72 @@
   border-top: 1px solid #eee;
   text-align: center;
 }
+
+/* Footer Container */
+.footer-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFD300; /* Yellow from the navbar */
+  padding: 1rem 2rem;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.15);
+  position: relative;
+  width: 100%;
+}
+
+/* Left - Support Email */
+.footer-left {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.footer-left a {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-left a:hover {
+  color: #333;
+}
+
+/* Center - Logo & Copyright */
+.footer-center {
+  text-align: center;
+}
+
+.footer-logo {
+  height: 40px;
+  width: auto;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer-logo:hover {
+  transform: scale(1.1);
+}
+
+.footer-center p {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Right - Social Icons */
+.footer-right {
+  display: flex;
+  gap: 1.5rem;
+  margin-right: 60px;
+}
+
+.social-icon {
+  font-size: 1.5rem;
+  color: black;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+  color: #333;
+}
+

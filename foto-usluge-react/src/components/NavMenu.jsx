@@ -37,7 +37,9 @@ const NavMenu = () => {
       {/* Breadcrumbs Section */}
       {breadcrumbsOpen && (
         <div className="breadcrumbs">
-          <p>Home &gt; Current Page</p>
+          <p>
+            <a href="#home">Home</a> &gt; <span>Current Page</span>
+          </p>
         </div>
       )}
     </>
