@@ -1,12 +1,61 @@
 import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const NavMenu = () => {
   const [breadcrumbsOpen, setBreadcrumbsOpen] = useState(false);
 
+  // Get current route info
+  const location = useLocation();
+  // Split the pathname on "/" and remove empty items
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+
+  // If there are no segments, we are on home page
+  const isHomePage = pathSegments.length === 0;
+
+  // Toggle breadcrumbs
   const toggleBreadcrumbs = () => {
     setBreadcrumbsOpen(!breadcrumbsOpen);
   };
+
+  // Build a dynamic breadcrumb trail
+  // Example: If pathname === "/services/design",
+  // pathSegments = ["services", "design"].
+  // We'll produce: Home > [Link to /services] > [Current: design]
+  const breadcrumbs = [];
+  // Always show "Home" link first if not home page
+  if (!isHomePage) {
+    breadcrumbs.push(
+      <React.Fragment key="home">
+        <Link to="/">Home</Link>
+      </React.Fragment>
+    );
+
+    // Build incremental paths for each segment
+    let accumulatedPath = "";
+    pathSegments.forEach((segment, index) => {
+      accumulatedPath += `/${segment}`;
+      // If this is the last segment, show plain text
+      const isLast = index === pathSegments.length - 1;
+      if (!isLast) {
+        // Intermediate segment -> Link
+        breadcrumbs.push(
+          <React.Fragment key={accumulatedPath}>
+            {" > "}
+            <Link to={accumulatedPath}>{segment}</Link>
+          </React.Fragment>
+        );
+      } else {
+        // Final segment -> Current page text
+        breadcrumbs.push(
+          <React.Fragment key={accumulatedPath}>
+            {" > "}
+            <span>{segment}</span>
+          </React.Fragment>
+        );
+      }
+    });
+  }
 
   return (
     <>
@@ -20,26 +69,36 @@ const NavMenu = () => {
         {/* Right - Nav Links */}
         <div className="nav-right">
           <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#about">About Us</a></li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/services">Services</Link>
+            </li>
+            <li>
+              <Link to="/about">About Us</Link>
+            </li>
           </ul>
         </div>
 
-        {/* Bottom Center - Arrow in Black Circle */}
-        <div className="nav-center" onClick={toggleBreadcrumbs}>
-          <div className="arrow-circle">
-            {breadcrumbsOpen ? <IoIosArrowUp className="arrow-icon" /> : <IoIosArrowDown className="arrow-icon" />}
+        {/* Show arrow circle ONLY if not home page */}
+        {!isHomePage && (
+          <div className="nav-center" onClick={toggleBreadcrumbs}>
+            <div className="arrow-circle">
+              {breadcrumbsOpen ? (
+                <IoIosArrowUp className="arrow-icon" />
+              ) : (
+                <IoIosArrowDown className="arrow-icon" />
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </nav>
 
-      {/* Breadcrumbs Section */}
-      {breadcrumbsOpen && (
+      {/* Breadcrumbs Section (only if not home page) */}
+      {!isHomePage && breadcrumbsOpen && (
         <div className="breadcrumbs">
-          <p>
-            <a href="#home">Home</a> &gt; <span>Current Page</span>
-          </p>
+          <p>{breadcrumbs}</p>
         </div>
       )}
     </>

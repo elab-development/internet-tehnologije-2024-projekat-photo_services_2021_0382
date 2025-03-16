@@ -362,3 +362,100 @@
   background-color: #222;
   color: #fff;
 }
+/* -----------------------------------------------------------
+   ABOUT US PAGE STYLES
+----------------------------------------------------------- */
+.about-container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.about-header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.about-header h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.about-slider {
+  margin-bottom: 2rem;
+  margin-left: 12rem;
+}
+
+.about-content {
+  text-align: justify;
+  line-height: 1.8;
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.about-content h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-content p {
+  margin-bottom: 1rem;
+}
+
+/* Leadership Team Section */
+.leadership-team {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.leadership-team h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 2rem;
+}
+
+h3{
+  font-size: 1.5rem;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  gap: 6rem;
+  flex-wrap: wrap;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-photo {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid #FFD300;
+  margin-bottom: 1rem;
+}
