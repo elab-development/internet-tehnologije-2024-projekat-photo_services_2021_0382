@@ -145,6 +145,7 @@
 /* Center - Logo & Copyright */
 .footer-center {
   text-align: center;
+  margin-right: 160px;
 }
 
 .footer-logo {
@@ -182,3 +183,182 @@
   color: #333;
 }
 
+/* -----------------------------------------------------------
+   HOME CONTAINER
+----------------------------------------------------------- */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  box-sizing: border-box;
+}
+
+/* -----------------------------------------------------------
+   HERO TEXT SECTION
+----------------------------------------------------------- */
+.home-text {
+  width: 60%;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.home-heading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.home-subheading {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.home-description {
+  font-size: 1rem;
+  color: #777;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Optional: If you still want "home-buttons" in the hero */
+.home-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #222;
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #222;
+  border: 2px solid #222;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: scale(1.05);
+}
+
+/* -----------------------------------------------------------
+   HERO IMAGE SLIDER
+----------------------------------------------------------- */
+.hero-slider {
+  width: 80%;
+  max-width: 1200px;
+  height: 600px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.hero-slider .slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 1s ease-in-out;
+}
+
+/* -----------------------------------------------------------
+   LATEST SERVICES SECTION
+----------------------------------------------------------- */
+.latest-services {
+  width: 100%;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.latest-services h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 2rem;
+}
+
+/* The container that holds the discrete slider */
+.services-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  overflow: hidden;
+  width: 1500px; /* 3 cards * (300px + 20px margin) = 960, or adjust to your liking */
+  max-width: 100%;
+  margin: auto;
+}
+
+/* -----------------------------------------------------------
+   CARD (Service Card)
+----------------------------------------------------------- */
+.service-card {
+  width: 500px;
+  height: 380px;
+  background-color: #fff;
+  padding: 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.08);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+/* Price & View Details Buttons */
+.price-btn {
+  background-color: #222;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  margin-top: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.view-details-btn {
+  margin-left: 50px;
+  display: flex;
+  margin-top: 0.5rem;
+  margin-right: 60px;
+  margin-left: 60px;
+  padding: 0.5rem;
+  text-decoration: none;
+  font-size: 0.9rem;
+  background-color: transparent;
+  color: #222;
+  border: 2px solid #222;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.view-details-btn:hover {
+  background-color: #222;
+  color: #fff;
+}
