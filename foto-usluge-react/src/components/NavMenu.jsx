@@ -5,25 +5,17 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 const NavMenu = () => {
   const [breadcrumbsOpen, setBreadcrumbsOpen] = useState(false);
 
-  // Get current route info
   const location = useLocation();
-  // Split the pathname on "/" and remove empty items
   const pathSegments = location.pathname.split("/").filter(Boolean);
 
-  // If there are no segments, we are on home page
   const isHomePage = pathSegments.length === 0;
 
-  // Toggle breadcrumbs
   const toggleBreadcrumbs = () => {
     setBreadcrumbsOpen(!breadcrumbsOpen);
   };
 
-  // Build a dynamic breadcrumb trail
-  // Example: If pathname === "/services/design",
-  // pathSegments = ["services", "design"].
-  // We'll produce: Home > [Link to /services] > [Current: design]
   const breadcrumbs = [];
-  // Always show "Home" link first if not home page
+
   if (!isHomePage) {
     breadcrumbs.push(
       <React.Fragment key="home">
@@ -31,7 +23,6 @@ const NavMenu = () => {
       </React.Fragment>
     );
 
-    // Build incremental paths for each segment
     let accumulatedPath = "";
     let segmentText = "";
     pathSegments.forEach((segment, index) => {
@@ -47,11 +38,9 @@ const NavMenu = () => {
       }else{
         segmentText = "";
       }
-      // If this is the last segment, show plain text
       const isLast = index === pathSegments.length - 1;
       if(segmentText !== ""){
         if (!isLast) {
-          // Intermediate segment -> Link
           breadcrumbs.push(
             <React.Fragment key={accumulatedPath}>
               {" > "}
@@ -59,7 +48,6 @@ const NavMenu = () => {
             </React.Fragment>
           );
         } else {
-          // Final segment -> Current page text
           breadcrumbs.push(
             <React.Fragment key={accumulatedPath}>
               {" > "}
@@ -74,14 +62,11 @@ const NavMenu = () => {
 
   return (
     <>
-      {/* Navigation Bar */}
       <nav className="nav-container">
-        {/* Left - Logo */}
         <div className="nav-left">
           <img src="/assets/logo.png" alt="Freelance Logo" className="nav-logo" />
         </div>
 
-        {/* Right - Nav Links */}
         <div className="nav-right">
           <ul>
             <li>
@@ -96,7 +81,6 @@ const NavMenu = () => {
           </ul>
         </div>
 
-        {/* Show arrow circle ONLY if not home page */}
         {!isHomePage && (
           <div className="nav-center" onClick={toggleBreadcrumbs}>
             <div className="arrow-circle">
@@ -110,7 +94,6 @@ const NavMenu = () => {
         )}
       </nav>
 
-      {/* Breadcrumbs Section (only if not home page) */}
       {!isHomePage && breadcrumbsOpen && (
         <div className="breadcrumbs">
           <p style={{marginLeft:"60px", marginTop:"30px", fontSize:"20px"}}>{breadcrumbs}</p>

@@ -4,27 +4,23 @@ import useCategories from "../hooks/useCategories";
 import Card from "../components/Card";
 
 const Services = () => {
-  // States for filtering & pagination
+
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [category, setCategory] = useState("");
 
-  // Fetch all services & categories (client-side filtering)
   const { allServices, loading: servicesLoading } = useServices();
   const { categories, loading: categoriesLoading } = useCategories();
 
-  // Client-side filter/sort/pagination:
   let filteredServices = [...allServices];
 
-  // Filter by name (search)
   if (search) {
     filteredServices = filteredServices.filter(service =>
       service.name.toLowerCase().includes(search.toLowerCase())
     );
   }
 
-  // Filter by category ID (as stored in service_category_id)
   if (category) {
     const categoryId = parseInt(category, 10);
     filteredServices = filteredServices.filter(
@@ -32,7 +28,6 @@ const Services = () => {
     );
   }
 
-  // Sort by price (if sort is "asc" or "desc")
   if (sort) {
     filteredServices.sort((a, b) => {
       if (sort === "asc") return a.price - b.price;
@@ -41,14 +36,12 @@ const Services = () => {
     });
   }
 
-  // Client-side pagination: 6 services per page
   const perPage = 6;
   const totalServices = filteredServices.length;
   const lastPage = Math.ceil(totalServices / perPage);
   const startIndex = (page - 1) * perPage;
   const paginatedServices = filteredServices.slice(startIndex, startIndex + perPage);
 
-  // Handlers for filter bar inputs
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
     setPage(1);
@@ -64,7 +57,6 @@ const Services = () => {
     setPage(1);
   };
 
-  // Pagination helpers
   const goToPage = (p) => {
     if (p >= 1 && p <= lastPage) {
       setPage(p);
@@ -89,7 +81,6 @@ const Services = () => {
     <div className="services-container">
       <h1>All Services</h1>
 
-      {/* Filter Bar */}
       <div className="filter-bar">
         <input
           type="text"
@@ -114,10 +105,8 @@ const Services = () => {
         </select>
       </div>
 
-      {/* Services Grid */}
       <div className="services-grid">
         {paginatedServices.map((service) => {
-          // Look up category name from the categories array
           const categoryObj = categories.find(
             (cat) => cat.id === service.service_category_id
           );
@@ -136,7 +125,6 @@ const Services = () => {
         })}
       </div>
 
-      {/* Pagination */}
       {lastPage > 1 && (
         <div className="pagination">
           <button

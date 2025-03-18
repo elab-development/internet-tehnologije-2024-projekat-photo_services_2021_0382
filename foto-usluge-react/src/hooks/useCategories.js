@@ -9,8 +9,7 @@ const useCategories = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/api/service-categories");
-        // Adjust based on your actual response structure
-        // e.g. { "service_categories": [...], "message": "All categories retrieved..." }
+
         setCategories(response.data.categories || []);
       } catch (error) {
         console.error("Error fetching categories:", error);

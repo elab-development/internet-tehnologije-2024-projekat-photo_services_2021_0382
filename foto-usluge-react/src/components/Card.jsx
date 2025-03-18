@@ -6,7 +6,6 @@ const Card = ({ title, description, category, price, link, className = "" }) => 
     <div className={`card ${className}`}>
       <h3>{title}</h3>
       <p>{description}</p>
-      {/* Display category name */}
       <p className="card-category">{category}</p>
       <button className="price-btn">${price}</button>
       <Link to={link} className="view-details-btn">

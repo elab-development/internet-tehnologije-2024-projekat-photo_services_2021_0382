@@ -7,7 +7,6 @@ const useQuote = (count = 3) => {
   useEffect(() => {
     const fetchQuotes = async () => {
       try {
-        // Use Promise.all to fetch multiple quotes concurrently
         const promises = Array.from({ length: count }, () =>
           axios.get("https://dummyjson.com/quotes/random")
         );

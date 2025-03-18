@@ -27,7 +27,6 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      {/* Hero Section */}
       <div className="home-text">
         <h1 className="home-heading">Capture Moments, Create Art</h1>
         <h3 className="home-subheading">Freelance Photography at Its Finest</h3>
@@ -38,15 +37,13 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Automatic Image Slider */}
       <ImageSlider images={sliderImages} interval={3000} className="hero-slider" />
 
-      {/* Latest Services Cards */}
       <div className="latest-services">
         <h2>Our Latest Photography Services</h2>
         <div className="services-slider">
           {latestServices.map((service) => {
-            // Look up the category name based on service_category_id
+
             const categoryObj = categories.find(
               (cat) => cat.id === service.service_category_id
             );

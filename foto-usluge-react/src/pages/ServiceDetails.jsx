@@ -10,13 +10,11 @@ const ServiceDetails = () => {
   const { service, loading: serviceLoading, error } = useServiceDetails(id);
   const { categories, loading: categoriesLoading } = useCategories();
 
-  // Compute the category name by matching the service_category_id
   const categoryName =
     service && categories.length > 0
       ? (categories.find(cat => cat.id === service.service_category_id)?.name || "default")
       : "default";
 
-  // Always call usePicsum with a fallback value to avoid conditional hook calls.
   const imageUrl = usePicsum(categoryName);
 
   if (serviceLoading || categoriesLoading) {

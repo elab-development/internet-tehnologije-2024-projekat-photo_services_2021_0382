@@ -4,7 +4,7 @@ import useQuote from "../hooks/useQuote";
 import { FaEnvelope, FaLinkedin } from "react-icons/fa";
 
 const AboutUs = () => {
-  // Array of image URLs for the About Us slider (slider11.jpg to slider20.jpg)
+
   const sliderImages = [
     "/assets/slider11.jpg",
     "/assets/slider12.jpg",
@@ -18,7 +18,6 @@ const AboutUs = () => {
     "/assets/slider20.jpg",
   ];
 
-  // Fetch three random quotes for the three team members
   const quotes = useQuote(3);
 
   return (
@@ -28,7 +27,6 @@ const AboutUs = () => {
         <h3>Capturing Life, One Click at a Time</h3>
       </div>
 
-      {/* Reusing the ImageSlider component */}
       <div className="about-slider">
         <ImageSlider images={sliderImages} interval={3000} className="hero-slider" />
       </div>
@@ -56,7 +54,6 @@ const AboutUs = () => {
         </p>
       </div>
 
-      {/* Leadership Team Section */}
       <div className="leadership-team">
         <h2>Our Leadership Team</h2>
         <div className="team-members">
