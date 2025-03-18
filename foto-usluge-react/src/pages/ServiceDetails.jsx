@@ -40,7 +40,7 @@ const ServiceDetails = () => {
         <div className="service-details-buttons">
           <button
             className="offer-btn"
-            onClick={() => navigate(`/services/service/${id}/offer`)}
+            onClick={() => alert("... NOT IMPLEMENTED YET ...")}
           >
             Make an Offer
           </button>
