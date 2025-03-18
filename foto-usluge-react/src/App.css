@@ -1,3 +1,7 @@
+html, body {
+  overflow-x: hidden;
+}
+
 /* Navigation container */
 .nav-container {
   display: flex;
@@ -7,6 +11,7 @@
   padding: 1rem 2rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.15);
   position: relative;
+  width: 100%;
 }
 
 /* Left side - Logo */
@@ -29,6 +34,7 @@
 /* Right side - Navigation Links */
 .nav-right {
   margin-left: auto; /* Pushes links to the right */
+  margin-right: 60px;
 }
 
 .nav-right ul {
@@ -436,10 +442,6 @@
   margin-bottom: 2rem;
 }
 
-h3{
-  font-size: 1.5rem;
-}
-
 .team-members {
   display: flex;
   justify-content: center;
@@ -458,4 +460,35 @@ h3{
   border-radius: 50%;
   border: 6px solid #FFD300;
   margin-bottom: 1rem;
+}
+
+/* Team Contact Icons */
+.team-contact {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.contact-icon:hover {
+  color: #555;
+}
+
+.team-quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 0.5rem;
+  white-space: normal;
+  overflow-wrap: break-word;
+  max-width: 250px; /* Adjust this value to make it smaller */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }

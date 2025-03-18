@@ -1,5 +1,7 @@
 import React from "react";
 import ImageSlider from "../components/ImageSlider";
+import useQuote from "../hooks/useQuote";
+import { FaEnvelope, FaLinkedin } from "react-icons/fa";
 
 const AboutUs = () => {
   // Array of image URLs for the About Us slider (slider11.jpg to slider20.jpg)
@@ -15,6 +17,9 @@ const AboutUs = () => {
     "/assets/slider19.jpg",
     "/assets/slider20.jpg",
   ];
+
+  // Fetch three random quotes for the three team members
+  const quotes = useQuote(3);
 
   return (
     <div className="about-container">
@@ -56,19 +61,46 @@ const AboutUs = () => {
         <h2>Our Leadership Team</h2>
         <div className="team-members">
           <div className="team-member">
-            <img src="/assets/leader1.jpg" alt="John Doe" className="team-photo" />
+            <img src="/assets/leader1.jpg" alt="Urlich Manson" className="team-photo" />
             <h3>Urlich Manson</h3>
             <p>Chief Executive Officer</p>
+            <div className="team-contact">
+              <a href="mailto:urlich@example.com" className="contact-icon">
+                <FaEnvelope />
+              </a>
+              <a href="https://linkedin.com/in/urlich" target="_blank" rel="noopener noreferrer" className="contact-icon">
+                <FaLinkedin />
+              </a>
+            </div>
+            {quotes[0] && <p className="team-quote">"{quotes[0]}"</p>}
           </div>
           <div className="team-member">
             <img src="/assets/leader2.jpg" alt="Jane Smith" className="team-photo" />
             <h3>Jane Smith</h3>
             <p>Chief Technology Officer</p>
+            <div className="team-contact">
+              <a href="mailto:jane@example.com" className="contact-icon">
+                <FaEnvelope />
+              </a>
+              <a href="https://linkedin.com/in/jane" target="_blank" rel="noopener noreferrer" className="contact-icon">
+                <FaLinkedin />
+              </a>
+            </div>
+            {quotes[1] && <p className="team-quote">"{quotes[1]}"</p>}
           </div>
           <div className="team-member">
             <img src="/assets/leader3.jpg" alt="Mark Johnson" className="team-photo" />
             <h3>Mark Johnson</h3>
             <p>Creative Director</p>
+            <div className="team-contact">
+              <a href="mailto:mark@example.com" className="contact-icon">
+                <FaEnvelope />
+              </a>
+              <a href="https://linkedin.com/in/mark" target="_blank" rel="noopener noreferrer" className="contact-icon">
+                <FaLinkedin />
+              </a>
+            </div>
+            {quotes[2] && <p className="team-quote">"{quotes[2]}"</p>}
           </div>
         </div>
       </div>
