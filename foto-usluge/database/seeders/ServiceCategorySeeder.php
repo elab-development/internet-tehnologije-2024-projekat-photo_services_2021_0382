@@ -14,13 +14,13 @@ class ServiceCategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'Portretna fotografija',
-            'Fotografisanje venčanja',
-            'Komercijalna fotografija',
-            'Fotografisanje proizvoda',
-            'Prirodna fotografija',
-            'Sportska fotografija',
-            'Arhitektonska fotografija',
+            'Portrait Photography',
+            'Wedding Photography',
+            'Commercial Photography',
+            'Product Photography',
+            'Nature Photography',
+            'Sports Photography',
+            'Architectural Photography',
         ];
 
         foreach ($categories as $category) {

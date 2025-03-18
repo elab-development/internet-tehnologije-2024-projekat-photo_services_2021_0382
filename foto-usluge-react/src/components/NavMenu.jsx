@@ -33,8 +33,15 @@ const NavMenu = () => {
 
     // Build incremental paths for each segment
     let accumulatedPath = "";
+    let segmentText = "";
     pathSegments.forEach((segment, index) => {
       accumulatedPath += `/${segment}`;
+
+      if(segment === "about"){
+        segmentText = "About Us";
+      }else if(segment === "services"){
+        segmentText = "Services";
+      }
       // If this is the last segment, show plain text
       const isLast = index === pathSegments.length - 1;
       if (!isLast) {
@@ -42,7 +49,7 @@ const NavMenu = () => {
         breadcrumbs.push(
           <React.Fragment key={accumulatedPath}>
             {" > "}
-            <Link to={accumulatedPath}>{segment}</Link>
+            <Link to={accumulatedPath}>{segmentText}</Link>
           </React.Fragment>
         );
       } else {
@@ -50,7 +57,7 @@ const NavMenu = () => {
         breadcrumbs.push(
           <React.Fragment key={accumulatedPath}>
             {" > "}
-            <span>{segment}</span>
+            <span>{segmentText}</span>
           </React.Fragment>
         );
       }
@@ -98,7 +105,7 @@ const NavMenu = () => {
       {/* Breadcrumbs Section (only if not home page) */}
       {!isHomePage && breadcrumbsOpen && (
         <div className="breadcrumbs">
-          <p>{breadcrumbs}</p>
+          <p style={{marginLeft:"60px", marginTop:"30px", fontSize:"20px"}}>{breadcrumbs}</p>
         </div>
       )}
     </>

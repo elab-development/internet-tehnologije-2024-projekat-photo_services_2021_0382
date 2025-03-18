@@ -2,9 +2,11 @@ import React from "react";
 import ImageSlider from "../components/ImageSlider";
 import Card from "../components/Card";
 import useLatestServices from "../hooks/useLatestServices";
+import useCategories from "../hooks/useCategories";
 
 const Home = () => {
   const { latestServices } = useLatestServices();
+  const { categories, loading: categoriesLoading } = useCategories();
 
   const sliderImages = [
     "/assets/slider1.jpg",
@@ -18,6 +20,10 @@ const Home = () => {
     "/assets/slider9.jpg",
     "/assets/slider10.jpg",
   ];
+
+  if (categoriesLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="home-container">
@@ -39,16 +45,24 @@ const Home = () => {
       <div className="latest-services">
         <h2>Our Latest Photography Services</h2>
         <div className="services-slider">
-          {latestServices.map((service, index) => (
-            <Card
-              key={index}
-              title={service.name}
-              description={service.description}
-              price={service.price}
-              link={`/services/${service.id}`}
-              className="service-card"
-            />
-          ))}
+          {latestServices.map((service) => {
+            // Look up the category name based on service_category_id
+            const categoryObj = categories.find(
+              (cat) => cat.id === service.service_category_id
+            );
+            const categoryName = categoryObj ? categoryObj.name : "";
+            return (
+              <Card
+                key={service.id}
+                title={service.name}
+                description={service.description}
+                category={categoryName}
+                price={service.price}
+                link={`/services/${service.id}`}
+                className="service-card"
+              />
+            );
+          })}
         </div>
       </div>
     </div>
