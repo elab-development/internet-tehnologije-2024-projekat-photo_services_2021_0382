@@ -41,26 +41,34 @@ const NavMenu = () => {
         segmentText = "About Us";
       }else if(segment === "services"){
         segmentText = "Services";
+      }else if(segment === "service"){
+        segmentText = "Service Details";
+        index++;
+      }else{
+        segmentText = "";
       }
       // If this is the last segment, show plain text
       const isLast = index === pathSegments.length - 1;
-      if (!isLast) {
-        // Intermediate segment -> Link
-        breadcrumbs.push(
-          <React.Fragment key={accumulatedPath}>
-            {" > "}
-            <Link to={accumulatedPath}>{segmentText}</Link>
-          </React.Fragment>
-        );
-      } else {
-        // Final segment -> Current page text
-        breadcrumbs.push(
-          <React.Fragment key={accumulatedPath}>
-            {" > "}
-            <span>{segmentText}</span>
-          </React.Fragment>
-        );
+      if(segmentText !== ""){
+        if (!isLast) {
+          // Intermediate segment -> Link
+          breadcrumbs.push(
+            <React.Fragment key={accumulatedPath}>
+              {" > "}
+              <Link to={accumulatedPath}>{segmentText}</Link>
+            </React.Fragment>
+          );
+        } else {
+          // Final segment -> Current page text
+          breadcrumbs.push(
+            <React.Fragment key={accumulatedPath}>
+              {" > "}
+              <span>{segmentText}</span>
+            </React.Fragment>
+          );
+        }
       }
+
     });
   }
 

@@ -58,7 +58,7 @@ const Home = () => {
                 description={service.description}
                 category={categoryName}
                 price={service.price}
-                link={`/services/${service.id}`}
+                link={`/services/service/${service.id}`}
                 className="service-card"
               />
             );
