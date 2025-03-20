@@ -10,6 +10,9 @@ const NavMenu = () => {
   // Dohvatanje trenutne rute iz React Router-a
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean); // Razdvaja URL u segmente
+  //console.log(location.pathname.split("/").filter(Boolean));
+  // false "" undefined null --> ovo su vam sve falsy values
+  // sve ostalo --> truthy values
 
   // Provera da li je korisnik na početnoj stranici
   const isHomePage = pathSegments.length === 0;
