@@ -20,6 +20,15 @@ const useLatestServices = () => {
 
         // Mešamo niz da bismo dobili nasumične usluge
         const shuffled = services.sort(() => 0.5 - Math.random());
+        // 0.5 - 0.8 --> prvi broj je manji od drugog, dakle brojevi rastu, elemente poredjaj rastuce
+        // 0.5 - 0.1 --> prvi broj je veci od drugog, dakle brojevi opadaju, elemente poredjaj opadajuce
+
+        //NIZ i slice funkcija
+        //PRE
+        // NIZ: 3, 4, 7, 9, 21, 25, 34, 25, 28, 10
+        // INDEKSI: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+        //POSLE
+        // REZULTATI 0, 1, 2, 3, 4 --> 3, 4, 7, 9, 21
 
         // Postavljamo samo prvih 5 nasumičnih usluga
         setLatestServices(shuffled.slice(0, 5));
