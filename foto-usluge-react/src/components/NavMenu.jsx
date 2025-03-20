@@ -16,8 +16,17 @@ const NavMenu = () => {
 
   // Provera da li je korisnik na početnoj stranici
   const isHomePage = pathSegments.length === 0;
+  // svejedno je da li je http://localhost:3000/ ili http://localhost:3000 jer to vodi na pocetnu
+  // location.pathname.split("/") --> vraca ["",""]
+  // i onda sa filterom location.pathname.split("/").filter(Boolean) --> vraca []
+  //LOGICKI OPERATORI(dakle rezultati su Boolean vrednosti tj. true ili false)
+  // == --> nestriktno poredjenje i ono samo poredi vrednost a ne i tip podatka(1 i "1" su isto)
+  // === --> striktno poredjenje i ono poredi i tip(1 i "1" nisu isto)
 
   // Funkcija za otvaranje/zatvaranje breadcrumbs sekcije
+  // OPERACIJA NEGACIJE //
+  // !false --> true
+  // !true --> false
   const toggleBreadcrumbs = () => {
     setBreadcrumbsOpen(!breadcrumbsOpen);
   };
@@ -37,6 +46,7 @@ const NavMenu = () => {
     let accumulatedPath = "";
     let segmentText = "";
     pathSegments.forEach((segment, index) => {
+      //console.log(segment, index);
       accumulatedPath += `/${segment}`;
 
       // Mapiranje segmenata URL-a u čitljive naslove
