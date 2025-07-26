@@ -2,85 +2,85 @@
 
 ![Logo](./images/logo.png)
 
-**PhotoLens** is a full-stack freelance photography marketplace that connects **Buyers** and **Sellers** in a modern, easy-to-use web application. Built with a **React** front-end and a **Laravel** back-end, PhotoLens empowers buyers to browse, filter, and make offers on photography services, while enabling sellers to create, manage, and analyze their service offerings.
+**PhotoLens** je full-stack platforma za freelance fotografiju koja povezuje **Kupce** i **Prodavce** u modernoj, jednostavnoj web aplikaciji. Napravljena je sa **React** front-endom i **Laravel** back-endom, i omogućava kupcima da pretražuju, filtriraju i daju ponude za fotografske usluge, dok prodavci mogu da kreiraju, upravljaju i analiziraju svoje usluge.
 
 ---
 
-## 🚀 Features
+## 🚀 Karakteristike
 
-- **React** SPA with client-side routing  
-- **Laravel** API secured with Sanctum  
-- Role-based access control: **Buyer** & **Seller**  
-- Service catalogue with search, filter, sort, and pagination  
-- Offer system with bidding, acceptance, rejection, and inline editing  
-- Seller analytics dashboard (total offers, revenue, trends)  
-- Responsive, modern UI with modals, tables, cards, and charts  
-
----
-
-## 🎭 User Roles & Use Cases
-
-### 1. Buyer
-
-1. **Browse Services**  
-   - View featured slider on **Home**.  
-   - Search, sort, and filter all available services on **Services**.  
-   - Click **View Details** to see full service info.
-
-2. **Make an Offer**  
-   - On a service’s details page, open the **Make an Offer** modal.  
-   - See current **base price** and **highest bid** so far.  
-   - Propose a new bid (≥ base price), select payment type, choose date, add notes.  
-   - Submit your offer; view it on **My Offers**.
-
-3. **Manage Offers**  
-   - On **My Offers**, see all your bids as cards.  
-   - Edit or delete pending offers.  
-   - Track status pill (Pending, Accepted, Rejected).
-
-### 2. Seller
-
-1. **Dashboard & Navigation**  
-   - After signing in as Seller, navigate to **Seller Home**, **My Services**, **Offers Received**, or **Analytics**.  
-   - Profile menu shows role-specific links: _My Services_, _My Offers_, _Analytics_.
-
-2. **Manage Services**  
-   - **Seller Services** page: create new services via modal (name, category, price, description).  
-   - Inline edit service price.  
-   - Paginate through your portfolio.
-
-3. **Handle Incoming Offers**  
-   - **Offers Received** table lists all bids on your services.  
-   - Columns: Service, Buyer, Top Bidder, Price, Payment, Date, Notes, Status, Actions.  
-   - Open modal to accept one offer—automatically rejects all other bids on that service.  
-   - Inline update price/status and view the current highest bidder.
-
-4. **Analytics**  
-   - **Seller Analytics** shows total/pending/accepted/rejected counts, total revenue, average offer.  
-   - Bar chart of offers over time; line chart of revenue trends.
+- **React** SPA sa klijentskim rutiranjem  
+- **Laravel** API zaštićen Sanctum-om  
+- Kontrola pristupa po ulogama: **Kupac** & **Prodavac**  
+- Katalog usluga sa pretragom, filtriranjem, sortiranjem i paginacijom  
+- Sistem ponuda sa nadmetanjem, prihvatanjem, odbijanjem i inline izmenama  
+- Prodavčeva kontrolna tabla (ukupan broj ponuda, prihodi, trendovi)  
+- Responsive, moderan UI sa modalima, karticama, tabelama i grafikonima  
 
 ---
 
-## 🏗 Technology Stack
+## 🎭 Uloge korisnika i primeri korišćenja
 
-| Layer        | Technology                   |
-| ------------ | ---------------------------- |
-| Front-end    | React, React Router, Axios   |
-| Styling      | Tailwind CSS, shadcn/ui      |
-| Charts       | Recharts, Chart.js           |
-| Back-end     | Laravel 10, Sanctum, Eloquent|
-| Database     | MySQL / MariaDB              |
-| HTTP Client  | Axios                        |
-| Deployment   | Docker, Nginx (optional)     |
+### 1. Kupac
+
+1. **Pregled usluga**  
+   - Početna strana sa sliderom na **Home**.  
+   - Pretraga, sortiranje i filtriranje na **Services**.  
+   - Klik na **View Details** za detalje usluge.
+
+2. **Podnošenje ponude**  
+   - Na stranici detalja usluge otvori modal **Make an Offer**.  
+   - Prikaže se trenutna **osnovna cena** i **najviša ponuda**.  
+   - Unesi svoju ponudu (≥ osnovne cene), odaberi način plaćanja, datum, i opuštanje.  
+   - Pošalji ponudu; prati je na **My Offers**.
+
+3. **Upravljanje ponudama**  
+   - Na **My Offers** vidi sve svoje ponude prikazane kao kartice.  
+   - Izmeni ili obriši ponude koje su još u statusu “Pending”.  
+   - Status prikazan u obliku pill-e (Pending, Accepted, Rejected).
+
+### 2. Prodavac
+
+1. **Navigacija i kontrolna tabla**  
+   - Posle prijave za Prodavca, idi na **Seller Home**, **My Services**, **Offers Received** ili **Analytics**.  
+   - Profil meni prikazuje uloge-specifične linkove: _My Services_, _My Offers_, _Analytics_.
+
+2. **Upravljanje uslugama**  
+   - Stranica **Seller Services**: kreiraj nove usluge putem modala (naziv, kategorija, cena, opis).  
+   - Inline izmena cene usluge.  
+   - Paginiraj kroz svoj portfolio.
+
+3. **Obrada pristiglih ponuda**  
+   - Stranica **Offers Received** prikazuje tabelu svih ponuda na tvoje usluge.  
+   - Kolone: Usluga, Kupac, Top Bidder, Cena, Plaćanje, Datum, Napomene, Status, Akcije.  
+   - Otvori modal da prihvatiš jednu ponudu — automatski odbija ostale ponude za tu uslugu.  
+   - Inline izmena cene/statusa i prikaz trenutnog najvišeg ponuđača.
+
+4. **Analitika**  
+   - **Seller Analytics** prikazuje: ukupan broj ponuda, pending/accepted/rejected, ukupan prihod, prosečnu ponudu.  
+   - Stubičasti grafikon “Ponude tokom vremena” i linijski grafikon “Prihod tokom vremena”.
 
 ---
 
-## 📥 Installation & Setup
+## 🏗 Tehnologije
 
-### Prerequisites
+| Sloj           | Tehnologija                    |
+| -------------- | ------------------------------ |
+| Front-end      | React, React Router, Axios     |
+| Stilizacija    | Tailwind CSS, shadcn/ui        |
+| Grafikoni      | Recharts, Chart.js             |
+| Back-end       | Laravel 10, Sanctum, Eloquent  |
+| Baza podataka  | MySQL / MariaDB                |
+| HTTP klijent   | Axios                          |
+| Deployment     | Docker, Nginx (opciono)        |
+
+---
+
+## 📥 Instalacija i pokretanje
+
+### Pretpostavke
 
 - PHP ≥ 8.1, Composer  
-- Node.js ≥ 16, npm or Yarn  
+- Node.js ≥ 16, npm ili Yarn  
 - MySQL / MariaDB  
 - Git  
 
