@@ -23,7 +23,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/services', [ServiceController::class, 'store']);
     Route::patch('/services/{id}', [ServiceController::class, 'updatePrice']);
-
+    
+    // Seller analytics endpoint
+    Route::get('/seller/analytics', [OfferController::class, 'analytics']);
     Route::post('/offers', [OfferController::class, 'store']);
     Route::put('/offers/{id}', [OfferController::class, 'updateByBuyer']);
     Route::patch('/offers/{id}', [OfferController::class, 'updateBySeller']);
@@ -36,6 +38,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/users/{id}', [UserController::class,'show']);
 
     Route::get('/services/seller', [ServiceController::class, 'sellerIndex']);
+
+
+
 
 });
 

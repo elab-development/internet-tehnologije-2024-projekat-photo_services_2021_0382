@@ -8,6 +8,7 @@ use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OfferController extends Controller
 {
@@ -151,5 +152,69 @@ class OfferController extends Controller
 
         $offers = Offer::where('seller_id', $user->id)->get();
         return OfferResource::collection($offers);
+    }
+    
+
+    /**
+     * GET /api/offers/seller/analytics
+     */
+    public function analytics()
+    {
+        $user = auth()->user();
+        if (!$user || $user->role !== 'seller') {
+            return response()->json([
+                'error' => 'Unauthorized. Only sellers can view analytics.'
+            ], 403);
+        }
+
+        // Base query for this seller
+        $base = Offer::where('seller_id', $user->id);
+
+        // Totals
+        $totalOffers    = (clone $base)->count();
+        $pendingCount   = (clone $base)->where('status', 'pending')->count();
+        $acceptedCount  = (clone $base)->where('status', 'accepted')->count();
+        $rejectedCount  = (clone $base)->where('status', 'rejected')->count();
+
+        // Revenue from accepted offers
+        $totalRevenue   = (clone $base)
+                            ->where('status', 'accepted')
+                            ->sum('price');
+
+        // Average offer price (all statuses)
+        $averageOffer   = (clone $base)->avg('price') ?: 0;
+
+        // Build monthly data:
+        // - month: "2025-01", "2025-02", etc.
+        // - offers: total count in that month
+        // - revenue: sum(price) of accepted offers in that month
+        $monthlyRaw = (clone $base)
+            ->select([
+                DB::raw("DATE_FORMAT(`date`, '%Y-%m') as month"),
+                DB::raw("COUNT(*) as offers"),
+                DB::raw("SUM(CASE WHEN status = 'accepted' THEN price ELSE 0 END) as revenue"),
+            ])
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+
+        // Map to plain array
+        $monthlyData = $monthlyRaw->map(function($row) {
+            return [
+                'month'   => $row->month,
+                'offers'  => (int) $row->offers,
+                'revenue' => (float) $row->revenue,
+            ];
+        })->toArray();
+
+        return response()->json([
+            'total_offers'    => $totalOffers,
+            'pending_offers'  => $pendingCount,
+            'accepted_offers' => $acceptedCount,
+            'rejected_offers' => $rejectedCount,
+            'total_revenue'   => (float) $totalRevenue,
+            'average_offer'   => round($averageOffer, 2),
+            'monthly_data'    => $monthlyData,
+        ]);
     }
 }
