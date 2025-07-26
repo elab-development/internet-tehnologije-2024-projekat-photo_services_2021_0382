@@ -29,7 +29,9 @@ class OfferResource extends JsonResource
             ],
             'buyer' => [
                 'id' => $this->buyer->id,
-                'email' => $this->buyer->email,
+                'name'            => $this->buyer->name,            // ← add name
+                'email'           => $this->buyer->email,
+                'profile_picture' => $this->buyer->profile_picture, // ← optional
             ],
             'seller' => [
                 'id' => $this->seller->id,

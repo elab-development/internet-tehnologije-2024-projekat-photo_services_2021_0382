@@ -1,3 +1,4 @@
+// src/pages/SellerOffers.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IoClose } from "react-icons/io5";
@@ -23,15 +24,12 @@ const SellerOffers = () => {
     setLoading(true);
     try {
       const res = await axios.get("http://127.0.0.1:8000/api/offers/seller");
-      // normalize response shape
-      let arr = [];
-      if (Array.isArray(res.data)) {
-        arr = res.data;
-      } else if (Array.isArray(res.data.data)) {
-        arr = res.data.data;
-      } else if (Array.isArray(res.data.offers)) {
-        arr = res.data.offers;
-      }
+      // normalize response into an array
+      const arr =
+        Array.isArray(res.data)       ? res.data :
+        Array.isArray(res.data.data)  ? res.data.data :
+        Array.isArray(res.data.offers)? res.data.offers :
+        [];
       setOffers(arr);
       setError("");
     } catch {
@@ -40,6 +38,13 @@ const SellerOffers = () => {
       setLoading(false);
     }
   };
+
+  // build map service_id → highest‐price offer
+  const highestMap = offers.reduce((acc, o) => {
+    const sid = o.service.id;
+    if (!acc[sid] || o.price > acc[sid].price) acc[sid] = o;
+    return acc;
+  }, {});
 
   const openModal = (offer) => {
     setCurrent(offer);
@@ -81,6 +86,7 @@ const SellerOffers = () => {
               <tr>
                 <th>Service</th>
                 <th>Buyer</th>
+                <th>Top Bidder</th>
                 <th>Price</th>
                 <th>Payment</th>
                 <th>Date</th>
@@ -94,6 +100,12 @@ const SellerOffers = () => {
                 <tr key={o.id}>
                   <td>{o.service.name}</td>
                   <td>{o.buyer.email}</td>
+                  <td>
+                    {
+                      highestMap[o.service.id] &&
+                      highestMap[o.service.id].buyer.email
+                    }
+                  </td>
                   <td>${o.price}</td>
                   <td>{o.payment_type}</td>
                   <td>{o.date}</td>
@@ -116,6 +128,7 @@ const SellerOffers = () => {
         </div>
       )}
 
+      {/* edit modal */}
       {modalOpen && current && (
         <div className="so-modal-overlay">
           <div className="so-modal-content">
@@ -131,6 +144,7 @@ const SellerOffers = () => {
               <label>Price</label>
               <input
                 type="number"
+                min="0"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 required

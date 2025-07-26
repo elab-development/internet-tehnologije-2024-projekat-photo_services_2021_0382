@@ -39,8 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/services/seller', [ServiceController::class, 'sellerIndex']);
 
+    Route::patch('/services/{id}', [ServiceController::class, 'updatePriceOffer']);
 
-
+    Route::get('/services/{id}/offers', [OfferController::class, 'serviceOffers']);
 
 });
 

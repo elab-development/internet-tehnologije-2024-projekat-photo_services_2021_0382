@@ -114,5 +114,13 @@ class ServiceController extends Controller
         ]);
     }
 
+    public function updatePriceOffer(Request $request, $id)
+    {
+        $validated = $request->validate(['price'=>'required|numeric']);
+        $service = Service::findOrFail($id);
+        $service->price = $validated['price'];
+        $service->save();
+        return new ServiceResource($service);
+    }
 
 }

@@ -20,6 +20,7 @@ class OfferController extends Controller
     
         $validated = $request->validate([
             'service_id'   => 'required|exists:services,id',
+            'price'        => 'required|numeric|min:0',     
             'seller_id'    => 'required|exists:users,id',
             'payment_type' => 'required|string|in:credit card,cash,bank transfer',
             'date'         => 'required|date',
@@ -37,7 +38,7 @@ class OfferController extends Controller
             'service_id'   => $service->id,
             'seller_id'    => $seller->id,
             'buyer_id'     => auth()->id(),
-            'price'        => $service->price,
+            'price'        => $validated['price'], 
             'payment_type' => $validated['payment_type'],
             'date'         => $validated['date'],
             'notes'        => $validated['notes'] ?? null,
@@ -78,26 +79,35 @@ class OfferController extends Controller
         ]);
     }
 
-    public function updateBySeller(Request $request, $id)
+        public function updateBySeller(Request $request, $id)
     {
-        if (!auth()->check() || auth()->user()->role !== 'seller') {
+        $user = auth()->user();
+        if (!$user || $user->role !== 'seller') {
             return response()->json(['error' => 'Unauthorized. Only sellers can update offers.'], 403);
         }
 
         $validated = $request->validate([
-            'price'  => 'required|integer',
-            'status' => 'nullable|string|in:pending,accepted,rejected',
+            'price'  => 'required|numeric',
+            'status' => 'required|string|in:pending,accepted,rejected',
         ]);
 
         $offer = Offer::where('id', $id)
-            ->where('seller_id', auth()->id())
+            ->where('seller_id', $user->id)
             ->first();
 
         if (!$offer) {
             return response()->json(['error' => 'Offer not found or you do not have access to update it.'], 404);
         }
 
+        // Update this offer
         $offer->update($validated);
+
+        // If accepted, reject all other offers for the same service
+        if ($validated['status'] === 'accepted') {
+            Offer::where('service_id', $offer->service_id)
+                ->where('id', '!=', $offer->id)
+                ->update(['status' => 'rejected']);
+        }
 
         return response()->json([
             'message' => 'Offer updated successfully!',
@@ -216,5 +226,20 @@ class OfferController extends Controller
             'average_offer'   => round($averageOffer, 2),
             'monthly_data'    => $monthlyData,
         ]);
+    }
+
+        /**
+     * List all offers for a given service (sellers only).
+     */
+    public function serviceOffers($serviceId)
+    {
+        $user = auth()->user();
+
+        $service = Service::findOrFail($serviceId);
+
+        // eager-load buyer
+        $offers = $service->offers()->with('buyer')->get();
+
+        return OfferResource::collection($offers);
     }
 }
