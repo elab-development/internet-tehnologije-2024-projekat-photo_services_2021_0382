@@ -15,6 +15,7 @@ import SellerHome from "./pages/SellerHome";
 import MyOffers from "./pages/MyOffers";
 import SellerServices from './pages/SellerServices';
 import SellerOffers from "./pages/SellerOffers";
+import SellerAnalytics from './pages/SellerAnalytics';
 import "./App.css";
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
         <Route path="/seller-home" element={<SellerHome />} />
         <Route path="/seller-services" element={<SellerServices />} />
         <Route path="/seller-offers" element={<SellerOffers />} />
+        <Route path="/seller-analytics" element={<SellerAnalytics />} />
       </Routes>
       {loggedIn && <Footer />}
     </Router>

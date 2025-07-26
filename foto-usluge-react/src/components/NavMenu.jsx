@@ -127,6 +127,9 @@ const NavMenu = () => {
                   <Link to={offers} className="nav-menu-item">
                     My Offers
                   </Link>
+                  { user?.role === "seller" && <Link to='/seller-analytics' className="nav-menu-item">
+                    Analytics
+                  </Link>}
                   <button
                     className="nav-logout-btn"
                     onClick={handleLogout}

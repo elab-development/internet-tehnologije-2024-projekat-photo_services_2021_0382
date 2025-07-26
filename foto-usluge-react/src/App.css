@@ -2055,3 +2055,68 @@ h3{
 .status-pending  { background: #ffe599; color: #815029; }
 .status-accepted { background: #c6efce; color: #21610b; }
 .status-rejected { background: #f4cccc; color: #8a1c1c; }
+
+/* src/styles/SellerAnalytics.css */
+
+.analytics-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.analytics-header {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #000;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.chart-container {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.chart-container h2 {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.analytics-loading,
+.analytics-error {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #e63946;
+  margin-top: 2rem;
+}
+
