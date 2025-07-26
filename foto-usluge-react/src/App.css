@@ -89,6 +89,110 @@ html, body {
   cursor: pointer;
 }
 
+/* ──────────────────────────────────────────────
+   NavMenu Layout Fix
+────────────────────────────────────────────── */
+
+/* Make the right side a flex container */
+.nav-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;     /* push it to the right */
+  margin-right: 2rem;    /* some breathing room */
+  gap: 2rem;             /* space between the links and the avatar block */
+}
+
+/* Keep the UL as a horizontal flex too */
+.nav-right ul {
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Profile block styling */
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;           /* space between avatar and text */
+  /* remove any leftover margins here */
+  margin: 0;
+}
+
+/* Avatar (you may lighten or remove the border if you prefer) */
+.nav-avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  /* optional border styling */
+  border: 2px solid #000;
+}
+
+/* User info text */
+.nav-user-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.nav-username {
+  font-weight: 600;
+  color: #000;
+}
+
+.nav-role {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Finally, bump out your overall nav padding if you need more room: */
+.nav-container {
+  padding: 1rem 3rem; /* left/right padding */
+  margin-right: 1rem;
+}
+
+/* Profile submenu */
+.nav-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-profile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 20;
+  overflow: hidden;
+}
+
+.nav-logout-btn {
+  display: block;
+  padding: 0.75rem 1.5rem;
+  background: #000;
+  color: #FFD300;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav-logout-btn:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+
 .arrow-circle {
   width: 40px;
   height: 40px;
@@ -765,4 +869,263 @@ h3{
 * {
   scrollbar-width: thin;
   scrollbar-color: black #FFD300; /* thumb color, track color */
+}
+
+/* ──────────────────────────────────────────────
+   Auth Split‐Screen Layout & Form
+────────────────────────────────────────────── */
+/* full-screen flex container */
+.auth-split {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* left: slider, right: form */
+.auth-split-left,
+.auth-split-right {
+  flex: 1 1 50%;
+  min-width: 0;
+}
+
+/* ensure slider fills its side */
+.auth-split-left .auth-slider,
+.auth-split-left .slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* right half: form pinned to top */
+.auth-split-right {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f2f5f7;
+  overflow-y: auto;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* the auth form card */
+.auth-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: 4px solid #FFD300;
+  box-sizing: border-box;
+}
+
+/* logo */
+.auth-logo {
+  display: block;
+  margin: 0 auto 1rem;
+  height: 60px;
+  width: auto;
+}
+
+/* heading */
+.auth-form h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.75rem;
+  color: #000;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* labels */
+.auth-form label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+/* inputs */
+.auth-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+.auth-form input:focus {
+  border-color: #FFD300;
+}
+
+/* select matching inputs */
+.auth-form select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.65rem auto;
+  padding-right: 2rem;
+}
+.auth-form select:focus {
+  border-color: #FFD300;
+}
+
+/* select options styling */
+.auth-form select option {
+  background: #000;
+  color: #FFD300;
+}
+.auth-form select option:checked {
+  background: #FFD300;
+  color: #000;
+}
+.auth-form select option:hover {
+  background: #FFD300;
+  color: #000;
+}
+.auth-form select::-ms-expand {
+  display: none;
+}
+
+/* primary button */
+.btn-primary {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background: #000;
+  color: #FFD300;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.btn-primary:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+/* toggle link */
+.toggle {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.toggle a {
+  color: #FFD300;
+  font-weight: 600;
+  text-decoration: none;
+}
+.toggle a:hover {
+  color: #000;
+}
+
+/* error text */
+.error {
+  margin: 0.5rem 0;
+  color: #e63946;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* CustomSelect styles, matching your inputs */
+.custom-select {
+  position: relative;
+  margin-top: 1rem;
+}
+.custom-select label {
+  font-weight: 500;
+}
+.custom-select__trigger {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-align: left;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.custom-select__trigger:focus {
+  outline: none;
+  border-color: #FFD300;
+}
+.custom-select__trigger .arrow {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #666;
+  transition: transform 0.2s ease;
+}
+.custom-select__options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: #000;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+}
+.custom-select__option {
+  padding: 0.75rem;
+  color: #FFD300;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.custom-select__option:hover {
+  background: #FFD300;
+  color: #000;
+}
+/* ensure scrollbar matches theme */
+.custom-select__options::-webkit-scrollbar-thumb {
+  background-color: #FFD300;
+}
+
+/* in App.css */
+
+.upload-btn {
+  display: inline-block;
+  width: 98%;
+  text-align: center;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 2px dashed #FFD300;
+  border-radius: 6px;
+  background: transparent;
+  color: #000;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.upload-btn:hover {
+  background: #000;
+  color: #FFD300;
+}
+
+.profile-preview {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 1rem auto;
+  border: 2px solid #FFD300;
 }

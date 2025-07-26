@@ -1,113 +1,117 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-// Navigacioni meni koji uključuje breadcrumb navigaciju
 const NavMenu = () => {
-  // State za otvaranje/zatvaranje breadcrumbs sekcije
   const [breadcrumbsOpen, setBreadcrumbsOpen] = useState(false);
-
-  // Dohvatanje trenutne rute iz React Router-a
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const profileRef = useRef();
+  const navigate = useNavigate();
   const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean); // Razdvaja URL u segmente
-  //console.log(location.pathname.split("/").filter(Boolean));
-  // false "" undefined null --> ovo su vam sve falsy values
-  // sve ostalo --> truthy values
-
-  // Provera da li je korisnik na početnoj stranici
+  const pathSegments = location.pathname.split("/").filter(Boolean);
   const isHomePage = pathSegments.length === 0;
-  // svejedno je da li je http://localhost:3000/ ili http://localhost:3000 jer to vodi na pocetnu
-  // location.pathname.split("/") --> vraca ["",""]
-  // i onda sa filterom location.pathname.split("/").filter(Boolean) --> vraca []
-  //LOGICKI OPERATORI(dakle rezultati su Boolean vrednosti tj. true ili false)
-  // == --> nestriktno poredjenje i ono samo poredi vrednost a ne i tip podatka(1 i "1" su isto)
-  // === --> striktno poredjenje i ono poredi i tip(1 i "1" nisu isto)
 
-  // Funkcija za otvaranje/zatvaranje breadcrumbs sekcije
-  // OPERACIJA NEGACIJE //
-  // !false --> true
-  // !true --> false
-  const toggleBreadcrumbs = () => {
-    setBreadcrumbsOpen(!breadcrumbsOpen);
+  // load user from sessionStorage
+  useEffect(() => {
+    const stored = sessionStorage.getItem("user");
+    if (stored) setUser(JSON.parse(stored));
+  }, []);
+
+  // close profile menu on outside click
+  useEffect(() => {
+    const handler = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setProfileMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const toggleBreadcrumbs = () => setBreadcrumbsOpen((o) => !o);
+  const toggleProfileMenu = () => setProfileMenuOpen((o) => !o);
+
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://127.0.0.1:8000/api/logout");
+    } catch (e) {
+      console.error(e);
+    }
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
+    navigate("/");
   };
 
-  // Breadcrumbs niz koji će čuvati putanju do trenutne stranice
+  // build breadcrumbs...
   const breadcrumbs = [];
-
   if (!isHomePage) {
-    // Dodajemo početnu stranicu kao prvi breadcrumb
-    breadcrumbs.push(
-      <React.Fragment key="home">
-        <Link to="/">Home</Link>
-      </React.Fragment>
-    );
-
-    // Generisanje breadcrumb elemenata na osnovu trenutne putanje
-    let accumulatedPath = "";
-    let segmentText = "";
-    pathSegments.forEach((segment, index) => {
-      //console.log(segment, index);
-      accumulatedPath += `/${segment}`;
-
-      // Mapiranje segmenata URL-a u čitljive naslove
-      if (segment === "about") {
-        segmentText = "About Us";
-      } else if (segment === "services") {
-        segmentText = "Services";
-      } else if (segment === "service") {
-        segmentText = "Service Details";
-        index++; // Pomeranje indexa za jedan ako je segment "service"
-      } else {
-        segmentText = "";
-      }
-
-      // Provera da li je poslednji segment u nizu
-      const isLast = index === pathSegments.length - 1;
-      if (segmentText !== "") {
-        if (!isLast) {
-          breadcrumbs.push(
-            <React.Fragment key={accumulatedPath}>
-              {" > "}
-              <Link to={accumulatedPath}>{segmentText}</Link>
-            </React.Fragment>
-          );
-        } else {
-          breadcrumbs.push(
-            <React.Fragment key={accumulatedPath}>
-              {" > "}
-              <span>{segmentText}</span>
-            </React.Fragment>
-          );
-        }
-      }
+    breadcrumbs.push(<React.Fragment key="home"><Link to="/">Home</Link></React.Fragment>);
+    let acc = "";
+    pathSegments.forEach((seg, i) => {
+      acc += `/${seg}`;
+      let text = seg === "about" ? "About Us"
+               : seg === "services" ? "Services"
+               : seg === "service" ? "Service Details" : "";
+      if (!text) return;
+      const isLast = i === pathSegments.length - 1;
+      breadcrumbs.push(
+        <React.Fragment key={acc}>
+          {" > "}
+          {isLast ? <span>{text}</span> : <Link to={acc}>{text}</Link>}
+        </React.Fragment>
+      );
     });
   }
 
   return (
     <>
-      {/* Navigaciona traka */}
       <nav className="nav-container">
-        {/* Leva strana - Logo */}
         <div className="nav-left">
-          <img src="/assets/logo.png" alt="Freelance Logo" className="nav-logo" />
+          <img src="/assets/logo.png" alt="PhotoLens Logo" className="nav-logo" />
         </div>
 
-        {/* Desna strana - Navigacioni linkovi */}
         <div className="nav-right">
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/services">Services</Link>
-            </li>
-            <li>
-              <Link to="/about">About Us</Link>
-            </li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/services">Services</Link></li>
+            <li><Link to="/about">About Us</Link></li>
           </ul>
+
+          {user && (
+            <div
+              className="nav-profile"
+              ref={profileRef}
+              onClick={toggleProfileMenu}
+              style={{ marginRight: "2rem" }}
+            >
+              <img
+                src={user.profile_picture}
+                alt={`${user.name} avatar`}
+                className="nav-avatar"
+              />
+              <div className="nav-user-info">
+                <span className="nav-username">{user.name}</span>
+                <span className="nav-role">
+                  {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                </span>
+              </div>
+
+              {profileMenuOpen && (
+                <div className="nav-profile-menu">
+                  <button
+                    className="nav-logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Prikaz strelice za breadcrumbs ako nismo na početnoj stranici */}
         {!isHomePage && (
           <div className="nav-center" onClick={toggleBreadcrumbs}>
             <div className="arrow-circle">
@@ -121,7 +125,6 @@ const NavMenu = () => {
         )}
       </nav>
 
-      {/* Prikaz breadcrumbs sekcije ako je otvorena i ako nismo na početnoj stranici */}
       {!isHomePage && breadcrumbsOpen && (
         <div className="breadcrumbs">
           <p style={{ marginLeft: "60px", marginTop: "30px", fontSize: "20px" }}>

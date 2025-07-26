@@ -1,24 +1,54 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// src/App.js
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import axios from "axios";
+
 import NavMenu from "./components/NavMenu";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Services from "./pages/Services";
 import ServiceDetails from "./pages/ServiceDetails";
-import "./App.css"
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import "./App.css";
 
 function App() {
+  // track whether token exists in sessionStorage
+  const [loggedIn, setLoggedIn] = useState(!!sessionStorage.getItem("token"));
+
+  useEffect(() => {
+    // poll every second for token changes
+    const id = setInterval(() => {
+      const has = !!sessionStorage.getItem("token");
+      setLoggedIn(has);
+      if (has) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${sessionStorage.getItem("token")}`;
+      } else {
+        delete axios.defaults.headers.common["Authorization"];
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <Router>
-      <NavMenu />
+      {loggedIn && <NavMenu />}
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/service/:id" element={<ServiceDetails />} />
+        {/* Auth routes */}
+        <Route path="/" element={loggedIn ? <Navigate to="/home" /> : <Login />} />
+        <Route path="/register" element={loggedIn ? <Navigate to="/home" /> : <Register />} />
+
+        {/* Protected */}
+        <Route path="/home" element={loggedIn ? <Home /> : <Navigate to="/" />} />
+        <Route path="/about" element={loggedIn ? <AboutUs /> : <Navigate to="/" />} />
+        <Route path="/services" element={loggedIn ? <Services /> : <Navigate to="/" />} />
+        <Route
+          path="/services/service/:id"
+          element={loggedIn ? <ServiceDetails /> : <Navigate to="/" />}
+        />
       </Routes>
-      <Footer />
+      {loggedIn && <Footer />}
     </Router>
   );
 }
