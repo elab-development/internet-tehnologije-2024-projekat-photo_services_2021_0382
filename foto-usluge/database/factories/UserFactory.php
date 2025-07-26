@@ -23,12 +23,15 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $seed = $this->faker->uuid();
+
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'role' => $this->faker->randomElement(['buyer', 'seller']),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'profile_picture' => "https://picsum.photos/seed/{$seed}/200/200",
         ];
     }
 

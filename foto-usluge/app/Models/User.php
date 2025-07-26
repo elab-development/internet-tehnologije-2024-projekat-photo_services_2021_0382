@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<\\Database\\Factories\\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'profile_picture',  // added to allow mass assignment
     ];
 
     /**
@@ -35,11 +36,26 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
+     * Relationship: Offers where this user is the buyer
+     */
     public function buyerOffers()
     {
         return $this->hasMany(Offer::class, 'buyer_id');
     }
 
+    /**
+     * Relationship: Offers where this user is the seller
+     */
     public function sellerOffers()
     {
         return $this->hasMany(Offer::class, 'seller_id');
