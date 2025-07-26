@@ -1129,3 +1129,140 @@ h3{
   margin: 1rem auto;
   border: 2px solid #FFD300;
 }
+
+/* ─── Overlay & Modal ───────────────────────────────────────────── */
+.offer-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.offer-modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem;
+  max-width: 650px;
+  width: 90%;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+/* ─── Modern Header ────────────────────────────────────────────── */
+.modern-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.seller-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+  border: 2px solid #FFD300;
+}
+.seller-name {
+  margin: 0;
+  font-size: 1.25rem;
+}
+.seller-role {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ─── Service Info Card ───────────────────────────────────────── */
+.service-info {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+}
+.service-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+.service-desc {
+  margin: 0 0 0.75rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+.service-price {
+  margin: 0;
+  font-weight: bold;
+  color: #222;
+}
+
+/* ─── Form Layout ──────────────────────────────────────────────── */
+.offer-form .form-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.offer-form .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.offer-form .form-group.full-width {
+  flex: 1 1 100%;
+}
+.offer-form label {
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+}
+.offer-form input,
+.offer-form select,
+.offer-form textarea {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+.offer-form input:focus,
+.offer-form select:focus,
+.offer-form textarea:focus {
+  outline: none;
+  border-color: #FFD300;
+}
+
+/* ─── Submit Button ───────────────────────────────────────────── */
+.btn-submit {
+  width: 100%;
+  padding: 0.75rem;
+  background: #000;
+  color: #FFD300;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-submit:hover:not(:disabled) {
+  background: #FFD300;
+  color: #000;
+}
+
+/* ─── Error Message ────────────────────────────────────────────── */
+.error {
+  color: #e63946;
+  text-align: center;
+  margin-bottom: 1rem;
+}

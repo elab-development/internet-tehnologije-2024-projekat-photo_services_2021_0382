@@ -19,7 +19,8 @@ class ServiceResource extends JsonResource
             'name' => $this->name,
             'price' => $this->price,
             'description' => $this->description,
-            'service_category_id' => $this->service_category_id
+            'service_category_id' => $this->service_category_id,
+            'seller_id'           => $this->seller_id,   // ← expose it
         ];
     }
 }

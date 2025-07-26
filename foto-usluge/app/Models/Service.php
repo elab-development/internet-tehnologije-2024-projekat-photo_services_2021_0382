@@ -14,6 +14,7 @@ class Service extends Model
         'price', 
         'description', 
         'service_category_id', 
+        'seller_id',    
     ];
 
     
@@ -25,5 +26,10 @@ class Service extends Model
     public function offers()
     {
         return $this->hasMany(Offer::class);
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(User::class, 'seller_id');
     }
 }

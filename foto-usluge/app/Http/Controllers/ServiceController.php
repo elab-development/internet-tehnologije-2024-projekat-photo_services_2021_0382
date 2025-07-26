@@ -44,26 +44,29 @@ class ServiceController extends Controller
 
     public function store(Request $request)
     {
+        // Only allow sellers to create services
         if (!auth()->check() || auth()->user()->role !== 'seller') {
             return response()->json(['error' => 'Unauthorized. Only sellers can create services.'], 403);
         }
 
         $validated = $request->validate([
-            'name' => 'required|string',
-            'price' => 'required|integer',
-            'description' => 'required|string',
+            'name'                => 'required|string|max:255',
+            'description'         => 'required|string',
+            'price'               => 'required|numeric',
             'service_category_id' => 'required|exists:service_categories,id',
+            // you don’t need seller_id in the request — we’ll pull from auth()
         ]);
 
         $service = Service::create([
-            'name' => $validated['name'],
-            'price' => $validated['price'],
-            'description' => $validated['description'],
+            'name'                => $validated['name'],
+            'description'         => $validated['description'],
+            'price'               => $validated['price'],
             'service_category_id' => $validated['service_category_id'],
+            'seller_id'           => auth()->id(),     // ← link current user
         ]);
 
         return response()->json([
-            'message' => 'Service created successfully!',
+            'message' => 'Service created!',
             'service' => new ServiceResource($service),
         ], 201);
     }
