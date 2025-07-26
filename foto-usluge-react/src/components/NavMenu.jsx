@@ -73,6 +73,10 @@ const NavMenu = () => {
       acc += `/${seg}`;
       let text = 
         seg === "about"    ? "About Us" :
+        seg === "my-offers"    ? "My Offers" :
+        seg === "seller-services"    ? "My Services" :
+        seg === "seller-offers"    ? "My Offers" :
+        seg === "seller-analytics"    ? "Analytics" :
         seg === "services" ? "Services" :
         seg === "service"  ? "Service Details" : "";
       if (!text) return;
