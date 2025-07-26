@@ -1882,3 +1882,176 @@ h3{
   font-size: 1.1rem;
 }
 
+/* src/styles/SellerOffers.css */
+
+/* Container */
+.so-container {
+  padding: 2rem;
+}
+.so-container h1 {
+  margin-bottom: 1rem;
+}
+
+/* Table wrapper for horizontal scroll */
+.so-table-wrap {
+  overflow-x: auto;
+}
+
+/* Table */
+.so-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.so-table th,
+.so-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+.so-table th {
+  background: #FFD300;
+  color: #000;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Notes cell wraps */
+.so-notes {
+  max-width: 200px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Status badges */
+.so-status {
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.so-pending  { background: #f0ad4e; }
+.so-accepted { background: #5cb85c; }
+.so-rejected { background: #d9534f; }
+
+/* Edit button */
+.so-edit-btn {
+  background: #000;
+  color: #FFD300;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.so-edit-btn:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+/* Loading & error */
+.so-loading,
+.so-error {
+  text-align: center;
+  margin: 2rem 0;
+  color: #e63946;
+  font-size: 1.1rem;
+}
+
+/* Modal overlay */
+.so-modal-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+/* Modal content */
+.so-modal-content {
+  background: #fff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* Close button */
+.so-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Read-only info */
+.so-readonly p {
+  margin: 0.5rem 0;
+}
+
+/* Modal form */
+.so-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.so-form label {
+  font-weight: 500;
+}
+.so-form input,
+.so-form select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+.so-form input:focus,
+.so-form select:focus {
+  border-color: #FFD300;
+}
+
+/* Submit in modal */
+.so-submit-btn {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #000;
+  color: #FFD300;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.so-submit-btn:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+.so-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* status pill */
+.status-pill {
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.status-pending  { background: #ffe599; color: #815029; }
+.status-accepted { background: #c6efce; color: #21610b; }
+.status-rejected { background: #f4cccc; color: #8a1c1c; }

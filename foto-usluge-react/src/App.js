@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import SellerHome from "./pages/SellerHome";
 import MyOffers from "./pages/MyOffers";
 import SellerServices from './pages/SellerServices';
+import SellerOffers from "./pages/SellerOffers";
 import "./App.css";
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
         <Route path="/my-offers" element={loggedIn ? <MyOffers /> : <Navigate to="/" />} />
         <Route path="/seller-home" element={<SellerHome />} />
         <Route path="/seller-services" element={<SellerServices />} />
+        <Route path="/seller-offers" element={<SellerOffers />} />
       </Routes>
       {loggedIn && <Footer />}
     </Router>

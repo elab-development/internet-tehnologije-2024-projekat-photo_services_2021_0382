@@ -13,7 +13,6 @@ const MyOffers = () => {
   const [notes, setNotes]           = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  // set token header once
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (token) axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -23,20 +22,23 @@ const MyOffers = () => {
   const fetchOffers = async () => {
     try {
       const res = await axios.get("http://127.0.0.1:8000/api/offers/buyer");
-      // Laravel ResourceCollection usually lives in res.data.data
-      setOffers(Array.isArray(res.data) ? res.data : res.data.data || []);
-    } catch (e) {
+      const arr = Array.isArray(res.data)
+        ? res.data
+        : res.data.data || [];
+      setOffers(arr);
+      setError("");
+    } catch {
       setError("Failed to load your offers.");
     } finally {
       setLoading(false);
     }
   };
 
-  const openEdit = (offer) => {
-    setSelected(offer);
-    setPaymentType(offer.payment_type);
-    setDate(offer.date);
-    setNotes(offer.notes || "");
+  const openEdit = (off) => {
+    setSelected(off);
+    setPaymentType(off.payment_type);
+    setDate(off.date);
+    setNotes(off.notes || "");
     setModalOpen(true);
   };
   const closeModal = () => setModalOpen(false);
@@ -45,11 +47,10 @@ const MyOffers = () => {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await axios.put(`http://127.0.0.1:8000/api/offers/${selected.id}`, {
-        payment_type: paymentType,
-        date,
-        notes
-      });
+      await axios.put(
+        `http://127.0.0.1:8000/api/offers/${selected.id}`,
+        { payment_type: paymentType, date, notes }
+      );
       closeModal();
       fetchOffers();
     } catch {
@@ -63,7 +64,7 @@ const MyOffers = () => {
     if (!window.confirm("Really delete this offer?")) return;
     try {
       await axios.delete(`http://127.0.0.1:8000/api/offers/${id}`);
-      setOffers((o) => o.filter((x) => x.id !== id));
+      setOffers(o => o.filter(x => x.id !== id));
     } catch {
       alert("Delete failed.");
     }
@@ -76,25 +77,46 @@ const MyOffers = () => {
     <div className="mo-container">
       <h1>My Offers</h1>
 
-      <div className="offers-grid">
-        {offers.map((off) => (
-          <div key={off.id} className="offer-card">
-            <h3 className="offer-title">{off.service.name}</h3>
-            <p><strong>Price:</strong> ${off.price}</p>
-            <p><strong>Payment:</strong> {off.payment_type}</p>
-            <p><strong>Date:</strong> {off.date}</p>
-            <p><strong>Notes:</strong> {off.notes || "—"}</p>
-            <div className="offer-card-buttons">
-              <button className="btn-edit"  onClick={() => openEdit(off)}>Edit</button>
-              <button className="btn-delete" onClick={() => handleDelete(off.id)}>Delete</button>
+      {offers.length === 0 ? (
+        <p className="mo-empty">
+          You haven’t created any offers yet.
+        </p>
+      ) : (
+        <div className="offers-grid">
+          {offers.map(off => (
+            <div key={off.id} className="offer-card">
+              <div className="offer-card-header">
+                <h3 className="offer-title">{off.service.name}</h3>
+                <span className={`status-pill status-${off.status}`}>
+                  {off.status}
+                </span>
+              </div>
+              <p><strong>Price:</strong> ${off.price}</p>
+              <p><strong>Payment:</strong> {off.payment_type}</p>
+              <p><strong>Date:</strong> {off.date}</p>
+              <p><strong>Notes:</strong> {off.notes || "—"}</p>
+              <div className="offer-card-buttons">
+                <button
+                  className="btn-edit"
+                  onClick={() => openEdit(off)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="btn-delete"
+                  onClick={() => handleDelete(off.id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      {modalOpen && (
+      {modalOpen && selected && (
         <div className="modal-overlay" onClick={closeModal}>
-          <div className="edit-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="edit-modal" onClick={e => e.stopPropagation()}>
             <header className="modal-header">
               <h2>Edit Offer</h2>
               <button className="close-btn" onClick={closeModal}>
@@ -105,7 +127,9 @@ const MyOffers = () => {
             <section className="read-only-group">
               <div className="row">
                 <label>Service</label>
-                <div className="text-readonly">{selected.service.name}</div>
+                <div className="text-readonly">
+                  {selected.service.name}
+                </div>
               </div>
               <div className="row">
                 <label>Description</label>
@@ -115,7 +139,9 @@ const MyOffers = () => {
               </div>
               <div className="row">
                 <label>Price</label>
-                <div className="text-readonly">${selected.price}</div>
+                <div className="text-readonly">
+                  ${selected.price}
+                </div>
               </div>
             </section>
 
@@ -125,7 +151,7 @@ const MyOffers = () => {
                   <label>Payment Type</label>
                   <select
                     value={paymentType}
-                    onChange={(e) => setPaymentType(e.target.value)}
+                    onChange={e => setPaymentType(e.target.value)}
                     required
                   >
                     <option value="credit card">Credit Card</option>
@@ -138,7 +164,7 @@ const MyOffers = () => {
                   <input
                     type="date"
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}
+                    onChange={e => setDate(e.target.value)}
                     required
                   />
                 </div>
@@ -147,13 +173,16 @@ const MyOffers = () => {
                   <textarea
                     rows="3"
                     value={notes}
-                    onChange={(e) => setNotes(e.target.value)}
+                    onChange={e => setNotes(e.target.value)}
                   />
                 </div>
               </div>
-
               <footer className="modal-footer">
-                <button type="submit" className="btn-submit" disabled={submitting}>
+                <button
+                  type="submit"
+                  className="btn-submit"
+                  disabled={submitting}
+                >
                   {submitting ? "Updating…" : "Update Offer"}
                 </button>
               </footer>
