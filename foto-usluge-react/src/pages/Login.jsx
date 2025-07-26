@@ -21,14 +21,23 @@ const Login = () => {
     e.preventDefault();
     setError("");
     try {
-      const { data } = await axios.post("http://127.0.0.1:8000/api/login", {
-        email, password,
-      });
+      const { data } = await axios.post(
+        "http://127.0.0.1:8000/api/login",
+        { email, password }
+      );
+
       const { token, user } = data;
+      // persist token + user
       sessionStorage.setItem("token", token);
       sessionStorage.setItem("user", JSON.stringify(user));
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      navigate("/home");
+
+      // route based on role
+      if (user.role === "seller") {
+        navigate("/seller-home");
+      } else {
+        navigate("/home");
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }

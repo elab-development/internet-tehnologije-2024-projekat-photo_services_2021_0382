@@ -5,14 +5,14 @@ import axios from "axios";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const NavMenu = () => {
-  const [breadcrumbsOpen, setBreadcrumbsOpen]   = useState(false);
-  const [profileMenuOpen, setProfileMenuOpen]   = useState(false);
-  const [user, setUser]                         = useState(null);
-  const profileRef                              = useRef();
-  const navigate                                = useNavigate();
-  const location                                = useLocation();
-  const pathSegments                            = location.pathname.split("/").filter(Boolean);
-  const isHomePage                              = pathSegments.length === 0;
+  const [breadcrumbsOpen, setBreadcrumbsOpen] = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const profileRef = useRef();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const isHomePage = pathSegments.length === 0;
 
   // load user from sessionStorage
   useEffect(() => {
@@ -22,7 +22,7 @@ const NavMenu = () => {
 
   // close profile menu on outside click
   useEffect(() => {
-    const handler = (e) => {
+    const handler = e => {
       if (profileRef.current && !profileRef.current.contains(e.target)) {
         setProfileMenuOpen(false);
       }
@@ -31,8 +31,8 @@ const NavMenu = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const toggleBreadcrumbs = () => setBreadcrumbsOpen((o) => !o);
-  const toggleProfileMenu = () => setProfileMenuOpen((o) => !o);
+  const toggleBreadcrumbs = () => setBreadcrumbsOpen(o => !o);
+  const toggleProfileMenu = () => setProfileMenuOpen(o => !o);
 
   const handleLogout = async () => {
     try {
@@ -45,21 +45,34 @@ const NavMenu = () => {
     navigate("/");
   };
 
+  // Select menu items based on role
+  const menuItems = user?.role === "seller"
+    ? [
+        { to: "/seller-home",    label: "Home"     },
+        { to: "/seller-services", label: "Services" },
+        { to: "/seller-offers",   label: "Offers"   },
+      ]
+    : [
+        { to: "/",         label: "Home"     },
+        { to: "/services", label: "Services" },
+        { to: "/about",    label: "About Us" },
+      ];
+
   // build breadcrumbs...
   const breadcrumbs = [];
   if (!isHomePage) {
     breadcrumbs.push(
       <React.Fragment key="home">
-        <Link to="/">Home</Link>
+        <Link to={menuItems[0].to}>{menuItems[0].label}</Link>
       </React.Fragment>
     );
     let acc = "";
     pathSegments.forEach((seg, i) => {
       acc += `/${seg}`;
-      let text =
-        seg === "about"   ? "About Us" :
-        seg === "services"? "Services" :
-        seg === "service" ? "Service Details" : "";
+      let text = 
+        seg === "about"    ? "About Us" :
+        seg === "services" ? "Services" :
+        seg === "service"  ? "Service Details" : "";
       if (!text) return;
       const isLast = i === pathSegments.length - 1;
       breadcrumbs.push(
@@ -80,9 +93,11 @@ const NavMenu = () => {
 
         <div className="nav-right">
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/services">Services</Link></li>
-            <li><Link to="/about">About Us</Link></li>
+            {menuItems.map(item => (
+              <li key={item.to}>
+                <Link to={item.to}>{item.label}</Link>
+              </li>
+            ))}
           </ul>
 
           {user && (
@@ -106,7 +121,7 @@ const NavMenu = () => {
 
               {profileMenuOpen && (
                 <div className="nav-profile-menu">
-                  {/* NEW: My Offers link */}
+                  {/* always show My Offers in profile menu */}
                   <Link to="/my-offers" className="nav-menu-item">
                     My Offers
                   </Link>
