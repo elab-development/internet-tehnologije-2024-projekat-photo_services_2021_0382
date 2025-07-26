@@ -96,9 +96,23 @@ class ServiceController extends Controller
     }
 
 
+    public function sellerIndex(Request $request)
+    {
+        $perPage = $request->query('per_page', 6);
+        $services = Service::where('seller_id', auth()->id())
+                        ->paginate($perPage);
+
+        return response()->json([
+            'message'    => 'Your services retrieved successfully!',
+            'services'   => ServiceResource::collection($services->items()),
+            'pagination' => [
+                'current_page' => $services->currentPage(),
+                'last_page'    => $services->lastPage(),
+                'per_page'     => $services->perPage(),
+                'total'        => $services->total(),
+            ],
+        ]);
+    }
 
 
-    
-
-    
 }

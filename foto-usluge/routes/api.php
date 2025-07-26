@@ -14,7 +14,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
-Route::resource('services', ServiceController::class)->only(['index', 'show']);
+
 
 Route::get('/service-categories', [ServiceCategoryController::class, 'index']);
 
@@ -35,5 +35,8 @@ Route::middleware('auth:sanctum')->group(function () {
     // in api.php
     Route::get('/users/{id}', [UserController::class,'show']);
 
+    Route::get('/services/seller', [ServiceController::class, 'sellerIndex']);
+
 });
 
+Route::resource('services', ServiceController::class)->only(['index', 'show']);

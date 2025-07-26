@@ -1688,3 +1688,197 @@ h3{
   object-fit: cover;
   transition: opacity 1s ease-in-out;
 }
+/* src/styles/SellerServices.css */
+
+/* Container */
+.ss-container {
+  padding: 2rem;
+}
+.ss-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.ss-header h1 { margin: 0; }
+
+/* Add button */
+.ss-add-btn {
+  padding: 0.75rem 1.5rem;
+  background: #000;
+  color: #FFD300;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ss-add-btn:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+/* Empty state */
+.ss-empty {
+  text-align: center;
+  color: #555;
+  font-size: 1.1rem;
+}
+
+/* Grid */
+.ss-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Card */
+.ss-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.ss-card h3 {
+  margin: 0 0 0.5rem;
+}
+.ss-desc {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+/* Price row */
+.ss-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ss-price {
+  font-weight: bold;
+}
+.ss-edit-price-btn {
+  background: transparent;
+  border: 1px solid #000;
+  color: #000;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.ss-edit-price-btn:hover {
+  background: #000;
+  color: #FFD300;
+  border-color: #FFD300;
+}
+
+/* Pagination */
+.ss-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.ss-pagination button {
+  padding: 0.5rem 1rem;
+  background: #000;
+  color: #FFD300;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.ss-pagination button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.ss-pagination span {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Modal overlay */
+.ss-modal-overlay {
+  position: fixed;
+  top:0; left:0; right:0; bottom:0;
+  background: rgba(0,0,0,0.5);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+/* Modal box */
+.ss-modal-content {
+  background: #fff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* Close button */
+.ss-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Form inside modal */
+.ss-create-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.ss-create-form label {
+  font-weight: 500;
+}
+.ss-create-form input,
+.ss-create-form select,
+.ss-create-form textarea {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fafafa;
+  transition: border-color 0.2s;
+}
+.ss-create-form input:focus,
+.ss-create-form select:focus,
+.ss-create-form textarea:focus {
+  border-color: #FFD300;
+}
+
+/* Submit inside modal */
+.ss-create-submit {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: #000;
+  color: #FFD300;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.ss-create-submit:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+/* Loading & error */
+.ss-loading, .ss-error {
+  text-align: center;
+  color: #e63946;
+  font-size: 1.1rem;
+}
+

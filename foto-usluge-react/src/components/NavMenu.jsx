@@ -45,12 +45,14 @@ const NavMenu = () => {
     navigate("/");
   };
 
+  const offers = user?.role === "seller" ? '/seller-offers' : '/my-offers';
+
   // Select menu items based on role
   const menuItems = user?.role === "seller"
     ? [
         { to: "/seller-home",    label: "Home"     },
         { to: "/seller-services", label: "Services" },
-        { to: "/seller-offers",   label: "Offers"   },
+        { to: "/about",    label: "About Us" },
       ]
     : [
         { to: "/",         label: "Home"     },
@@ -122,7 +124,7 @@ const NavMenu = () => {
               {profileMenuOpen && (
                 <div className="nav-profile-menu">
                   {/* always show My Offers in profile menu */}
-                  <Link to="/my-offers" className="nav-menu-item">
+                  <Link to={offers} className="nav-menu-item">
                     My Offers
                   </Link>
                   <button
