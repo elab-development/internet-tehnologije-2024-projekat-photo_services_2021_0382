@@ -11,6 +11,7 @@ import Services from "./pages/Services";
 import ServiceDetails from "./pages/ServiceDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import MyOffers from "./pages/MyOffers";
 import "./App.css";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           path="/services/service/:id"
           element={loggedIn ? <ServiceDetails /> : <Navigate to="/" />}
         />
+        <Route path="/my-offers" element={loggedIn ? <MyOffers /> : <Navigate to="/" />} />
       </Routes>
       {loggedIn && <Footer />}
     </Router>

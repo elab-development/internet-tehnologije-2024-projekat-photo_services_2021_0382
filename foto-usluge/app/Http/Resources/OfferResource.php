@@ -24,6 +24,7 @@ class OfferResource extends JsonResource
             'service' => [
                 'id' => $this->service->id,
                 'name' => $this->service->name,
+                'description' => $this->service->description,
                 'category' => $this->service->serviceCategory->name ?? 'No Category',
             ],
             'buyer' => [

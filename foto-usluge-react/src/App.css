@@ -1266,3 +1266,359 @@ h3{
   text-align: center;
   margin-bottom: 1rem;
 }
+
+
+/* ------------ MyOffers grid ------------ */
+
+.mo-container {
+  padding: 2rem;
+}
+
+.mo-container h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.offer-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.offer-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  text-transform: capitalize;
+  color: #000;
+}
+
+.offer-card p {
+  margin: 0.25rem 0;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.offer-card-buttons {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-edit,
+.btn-delete {
+  flex: 1;
+  padding: 0.6rem 0;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-edit {
+  background: #000;
+  color: #FFD300;
+}
+
+.btn-edit:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+.btn-delete {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+/* ------------ Modal ------------ */
+
+/* ---------- Page & Grid ---------- */
+.mo-container {
+  padding: 2rem 1rem;
+}
+.mo-container h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+.offer-card {
+  background: #fff;
+  padding: 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.offer-title {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  text-transform: capitalize;
+  color: #000;
+}
+.offer-card p {
+  margin: 0.3rem 0;
+  color: #333;
+  font-size: 0.95rem;
+}
+.offer-card-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.btn-edit,
+.btn-delete {
+  flex: 1;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-edit {
+  background: #000; color: #FFD300;
+}
+.btn-edit:hover {
+  background: #FFD300; color: #000;
+}
+.btn-delete {
+  background: #e74c3c; color: #fff;
+}
+.btn-delete:hover {
+  background: #c0392b;
+}
+
+/* ---------- Modal Overlay ---------- */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
+
+/* ---------- Modal Box ---------- */
+.edit-modal {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  max-height: 85vh;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal-header {
+  background: #000;
+  color: #FFD300;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close-btn {
+  background: transparent;
+  border: none;
+  color: #FFD300;
+  cursor: pointer;
+}
+
+/* ---------- Read-only section ---------- */
+.read-only-group {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.read-only-group .row {
+  margin-bottom: 0.75rem;
+}
+.read-only-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+.text-readonly {
+  background: #f2f2f2;
+  padding: 0.6rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  color: #555;
+}
+.description {
+  max-height: 4.5rem;
+  overflow-y: auto;
+}
+
+/* ---------- Editable form ---------- */
+.modal-form {
+  flex: 1;
+  overflow-y: auto;
+}
+.editable-group {
+  padding: 1rem;
+}
+.editable-group .row {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.editable-group label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #333;
+}
+.editable-group select,
+.editable-group input,
+.editable-group textarea {
+  padding: 0.6rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  color: #333;
+}
+.notes-row textarea {
+  resize: vertical;
+}
+
+/* ---------- Footer & Button ---------- */
+.modal-footer {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-submit {
+  background: #000;
+  color: #FFD300;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-submit:hover:not(:disabled) {
+  background: #FFD300; color: #000;
+}
+
+/* ---------- Loading / Error states ---------- */
+.mo-loading,
+.mo-error {
+  text-align: center;
+  margin-top: 2rem;
+  color: #e74c3c;
+}
+
+
+
+/* ─────── PROFILE DROPDOWN ─────── */
+
+.nav-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.nav-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 0.75rem;
+  border: 2px solid #000;
+}
+
+.nav-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-username {
+  font-weight: 600;
+  color: #000;
+}
+.nav-role {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* the menu container */
+.nav-profile-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #000;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1500;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+}
+
+/* shared styling for both the Link and button */
+.nav-profile-menu .nav-menu-item,
+.nav-profile-menu .nav-logout-btn {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.95rem;
+  text-align: left;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  color: #FFD300;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* the “My Offers” link */
+.nav-profile-menu .nav-menu-item {
+  /* if it’s an <a> you may need display:block above */
+}
+
+/* the “Logout” button */
+.nav-profile-menu .nav-logout-btn {
+  /* inherits above too */
+}
+
+/* hover/highlight */
+.nav-profile-menu .nav-menu-item:hover,
+.nav-profile-menu .nav-logout-btn:hover {
+  background: #FFD300;
+  color: #000;
+}
+
+/* little separator line (optional) */
+.nav-profile-menu .nav-menu-item + .nav-logout-btn {
+  border-top: 1px solid rgba(255,255,255,0.1);
+}

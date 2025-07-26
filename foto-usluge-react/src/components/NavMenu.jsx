@@ -1,17 +1,18 @@
+// src/components/NavMenu.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
 const NavMenu = () => {
-  const [breadcrumbsOpen, setBreadcrumbsOpen] = useState(false);
-  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
-  const profileRef = useRef();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const isHomePage = pathSegments.length === 0;
+  const [breadcrumbsOpen, setBreadcrumbsOpen]   = useState(false);
+  const [profileMenuOpen, setProfileMenuOpen]   = useState(false);
+  const [user, setUser]                         = useState(null);
+  const profileRef                              = useRef();
+  const navigate                                = useNavigate();
+  const location                                = useLocation();
+  const pathSegments                            = location.pathname.split("/").filter(Boolean);
+  const isHomePage                              = pathSegments.length === 0;
 
   // load user from sessionStorage
   useEffect(() => {
@@ -47,13 +48,18 @@ const NavMenu = () => {
   // build breadcrumbs...
   const breadcrumbs = [];
   if (!isHomePage) {
-    breadcrumbs.push(<React.Fragment key="home"><Link to="/">Home</Link></React.Fragment>);
+    breadcrumbs.push(
+      <React.Fragment key="home">
+        <Link to="/">Home</Link>
+      </React.Fragment>
+    );
     let acc = "";
     pathSegments.forEach((seg, i) => {
       acc += `/${seg}`;
-      let text = seg === "about" ? "About Us"
-               : seg === "services" ? "Services"
-               : seg === "service" ? "Service Details" : "";
+      let text =
+        seg === "about"   ? "About Us" :
+        seg === "services"? "Services" :
+        seg === "service" ? "Service Details" : "";
       if (!text) return;
       const isLast = i === pathSegments.length - 1;
       breadcrumbs.push(
@@ -100,6 +106,10 @@ const NavMenu = () => {
 
               {profileMenuOpen && (
                 <div className="nav-profile-menu">
+                  {/* NEW: My Offers link */}
+                  <Link to="/my-offers" className="nav-menu-item">
+                    My Offers
+                  </Link>
                   <button
                     className="nav-logout-btn"
                     onClick={handleLogout}
