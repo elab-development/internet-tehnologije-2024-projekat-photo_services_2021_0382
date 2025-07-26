@@ -66,12 +66,11 @@
 | Sloj           | Tehnologija                    |
 | -------------- | ------------------------------ |
 | Front-end      | React, React Router, Axios     |
-| Stilizacija    | Tailwind CSS, shadcn/ui        |
-| Grafikoni      | Recharts, Chart.js             |
+| Stilizacija    | CSS                            |
+| Grafikoni      | Recharts                       |
 | Back-end       | Laravel 10, Sanctum, Eloquent  |
-| Baza podataka  | MySQL / MariaDB                |
+| Baza podataka  | MySQL                          |
 | HTTP klijent   | Axios                          |
-| Deployment     | Docker, Nginx (opciono)        |
 
 ---
 
@@ -81,7 +80,7 @@
 
 - PHP ≥ 8.1, Composer  
 - Node.js ≥ 16, npm ili Yarn  
-- MySQL / MariaDB  
+- MySQL 
 - Git  
 
 ---
