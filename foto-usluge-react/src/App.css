@@ -2347,3 +2347,65 @@ h3{
   font-weight: bold;
   margin-top:1rem;
 }
+
+/* Reset Password Modal */
+.reset-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.reset-modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.reset-close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.reset-modal-content h2 {
+  margin-top: 0;
+}
+.reset-modal-content label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+.reset-modal-content input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.reset-modal-content .btn-primary {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: inherit;
+}
+.success {
+  color: #28a745;
+  margin-top: 0.5rem;
+}
