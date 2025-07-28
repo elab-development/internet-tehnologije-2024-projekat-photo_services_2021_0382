@@ -55,7 +55,7 @@ const NavMenu = () => {
         { to: "/about",    label: "About Us" },
       ]
     : [
-        { to: "/",         label: "Home"     },
+        { to: "/home",         label: "Home"     },
         { to: "/services", label: "Services" },
         { to: "/about",    label: "About Us" },
       ];
