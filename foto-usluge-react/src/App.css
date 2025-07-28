@@ -606,11 +606,11 @@ h3{
 ----------------------------------------------------------- */
 .services-container {
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 1rem;
+      /* centriramo horizontalno */
+  padding: 0 1rem;        /* unutrašnji razmak sa strane */
   text-align: center;
-  margin-right: 400px;
 }
+
 
 .services-container h1 {
   font-family: 'Montserrat', sans-serif;
@@ -648,16 +648,19 @@ h3{
   /* Exactly 3 columns, each taking up an equal fraction of the container width */
   grid-template-columns: repeat(3, 1fr);
   /* Space between columns and rows */
-  gap: 2rem;
+  row-gap: 1rem;
+  column-gap: 5.8rem;
   margin-bottom: 2rem;
+  margin-left: 18rem;
 }
 
 /* Example for each card to keep them uniform */
 .service-card {
   background-color: #fff;
   border: 1px solid #ddd;
+  width: 135%;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 0.5rem;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   transition: transform 0.2s ease;
   display: flex;

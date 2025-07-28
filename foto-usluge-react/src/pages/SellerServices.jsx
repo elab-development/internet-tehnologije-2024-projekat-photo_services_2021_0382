@@ -123,7 +123,7 @@ const SellerServices = () => {
             disabled={page === 1}
           >Prev</button>
           <span>Page {page}</span>
-          <button onClick={() => setPage(p=>p+1)}>Next</button>
+          <button onClick={() => setPage(p=>p+1)} disabled={services.length < perPage}>Next</button>
         </div>
       )}
 

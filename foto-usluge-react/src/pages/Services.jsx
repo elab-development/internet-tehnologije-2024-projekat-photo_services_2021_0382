@@ -142,7 +142,7 @@ const Services = () => {
 
       {/* Paginacija - prikaz brojeva stranica i navigacija */}
       {lastPage > 1 && (
-        <div className="pagination">
+        <div className="pagination" style={{ marginBottom: "1rem" }}>
           <button
             className="pagination-btn"
             onClick={() => goToPage(page - 1)}
