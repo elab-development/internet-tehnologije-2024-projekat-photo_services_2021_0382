@@ -61,4 +61,12 @@ class User extends Authenticatable
         return $this->hasMany(Offer::class, 'seller_id');
     }
 
+    /**
+     * Usluge koje je korisnik kreirao kao prodavac
+    */
+    public function services()
+    {
+        return $this->hasMany(Service::class, 'seller_id');
+    }
+
 }
