@@ -96,7 +96,7 @@ const SellerServices = () => {
       ) : (
         <div className="ss-grid">
           {services.map(s => (
-            <div key={s.id} className="ss-card">
+            <div key={s.id} className="ss-card" style={{ width: "110%"}}>
               <h3>{s.name}</h3>
               <p className="ss-desc">{s.description}</p>
               <div className="ss-price-row">
